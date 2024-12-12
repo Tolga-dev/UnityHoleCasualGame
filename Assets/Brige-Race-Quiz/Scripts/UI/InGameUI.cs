@@ -1,4 +1,5 @@
 using System;
+using Brige_Race_Quiz.Scripts.Managers;
 using Brige_Race_Quiz.Scripts.So;
 using DG.Tweening;
 using TMPro;
@@ -37,7 +38,7 @@ namespace Brige_Race_Quiz.Scripts.UI
         // update level
         public void UpdateLevelProgress()
         {
-            var val = 1f - ((float)Level.Instance.objectsInScene / Level.Instance.totalObjects);
+            var val = 1f - ((float)LevelManager.Instance.objectsInScene / LevelManager.Instance.totalObjects);
             progressFillImage.DOFillAmount (val, .4f);
             Debug.Log("PlayPointSound");
         }

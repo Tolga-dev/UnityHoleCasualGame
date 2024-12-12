@@ -1,3 +1,4 @@
+using Brige_Race_Quiz.Scripts.Managers;
 using UnityEngine;
 
 namespace Brige_Race_Quiz.Scripts.UI

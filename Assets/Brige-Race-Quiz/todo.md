@@ -12,5 +12,6 @@
 * Level generator by button, save it and use it
 * Island generator by button, save it use it
 * 50 level enough
+* in some levels, objects and can eatable will be changed with timer
 
 

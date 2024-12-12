@@ -1,21 +1,22 @@
-﻿using Core;
+﻿using System.Collections.Generic;
+using Brige_Race_Quiz.Scripts.Managers;
+using Brige_Race_Quiz.Scripts.So;
+using Core;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Brige_Race_Quiz.Scripts
 {
-	public class Level : Singleton<Level>
+	public class LevelManager : Singleton<LevelManager>
 	{
-		[SerializeField] ParticleSystem winFx;
-
+		public FxManager fxManager;
+		public GameSo gameSo;
+		
 		[Space]
-		//remaining objects
 		[HideInInspector] public int objectsInScene;
-		//total objects at the beginning
 		[HideInInspector] public int totalObjects;
 
-		//the Objects parent
 		[SerializeField] Transform objectsParent;
 
 		[Space]
@@ -26,7 +27,6 @@ namespace Brige_Race_Quiz.Scripts
 		[SerializeField] SpriteRenderer groundBorderSprite;
 		[SerializeField] SpriteRenderer groundSideSprite;
 		[SerializeField] Image progressFillImage;
-
 		[SerializeField] SpriteRenderer bgFadeSprite;
 
 		[Space]
@@ -47,33 +47,58 @@ namespace Brige_Race_Quiz.Scripts
 		[SerializeField] Color cameraColor;
 		[SerializeField] Color fadeColor;
 
-
+		public List<GameObject> createdPrefabs = new List<GameObject>();
 		void Start ()
 		{
-			CountObjects ();
+			GenerateCurrentLevel();
 			UpdateLevelColors ();
 		}
 
-		void CountObjects ()
+		// new world generation
+		private void GenerateCurrentLevel()
 		{
-			//Count collectable white objects
-			totalObjects = objectsParent.childCount;
-			objectsInScene = totalObjects;
+			DestroyCreatedObjects();
+			
+			var currentLevel = gameSo.GetCurrentLevel();
+			var prefabs = currentLevel.objectPrefabs;
+			var transforms = currentLevel.objectTransforms;
+			var amount = prefabs.Count;
+			
+			for (int i = 0; i < amount; i++)
+			{
+				var createdPrefab = Instantiate(prefabs[i].prefab, transforms[i], Quaternion.identity,objectsParent);
+				createdPrefab.transform.parent = objectsParent;
+				createdPrefabs.Add(createdPrefab);
+			}
+			totalObjects = objectsInScene = amount;
 		}
 
-		public void PlayWinFx ()
+		// destroy world
+		private void DestroyCreatedObjects()
 		{
-			winFx.Play ();
+			foreach (var prefab in createdPrefabs)
+			{
+				Destroy(prefab);
+			}
+			createdPrefabs.Clear();
 		}
-
+		
 		public void LoadNextLevel ()
 		{
-			SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex + 1);
+			gameSo.currentLevel++;
+			RestartLevel();
 		}
 
-		public void RestartLevel ()
+		public void RestartLevel()
 		{
-			SceneManager.LoadScene (SceneManager.GetActiveScene ().buildIndex);
+			GenerateCurrentLevel();
+			UIManager.Instance.inGameUI.ResetGame();
+			Magnet.Instance.RestartMagnet();
+			Game.StartGame();
+		}
+		public void PlayWinFx ()
+		{
+			fxManager.CreateEffects("", transform);
 		}
 
 		void UpdateLevelColors ()
@@ -93,8 +118,6 @@ namespace Brige_Race_Quiz.Scripts
 
 		void OnValidate()
 		{
-			//This method will exeute whenever you change something of this script in the inspector
-			//this method won't be included in the final Build (Editor only)
 			UpdateLevelColors ();
 		}
 	}

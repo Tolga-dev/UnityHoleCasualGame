@@ -1,57 +1,61 @@
-﻿using DG.Tweening;
+﻿using Brige_Race_Quiz.Scripts.Managers;
+using DG.Tweening;
 using UnityEngine;
 
 namespace Brige_Race_Quiz.Scripts
 {
+	//Object or Obstacle is at the bottom of the Hole
 	public class UndergroundCollision : MonoBehaviour
 	{
-
 		void OnTriggerEnter (Collider other)
 		{
-			//Object or Obstacle is at the bottom of the Hole
-
 			if (!Game.isGameover) {
-				string tag = other.tag;
-				//------------------------ O B J E C T --------------------------
-				if (tag.Equals ("Object")) { 
-					Level.Instance.objectsInScene--;
-					UIManager.Instance.UpdateLevelProgress ();
-
-					//Make sure to remove this object from Magnetic field
-					Magnet.Instance.RemoveFromMagnetField (other.attachedRigidbody);
-
-					Destroy (other.gameObject);
-
-					//check if win
-					if (Level.Instance.objectsInScene == 0) {
-						//no more objects to collect (WIN)
-						UIManager.Instance.ShowLevelCompletedUI ();
-						Level.Instance.PlayWinFx ();
-
-						//Load Next level after 2 seconds
-						Invoke ("NextLevel", 2f);
-					}
+				var s = other.tag;
+				
+				if (s.Equals ("Object"))
+				{
+					EatPointObject(other);
 				}
-				//---------------------- O B S T A C L E -----------------------
-				if (tag.Equals ("Obstacle")) {
-					Game.isGameover = true;
-					Destroy (other.gameObject);
-
-					//Shake the camera for 1 second
-					Camera.main.transform
-						.DOShakePosition (1f, .2f, 20, 90f)
-						.OnComplete (() => {
-							//restart level after shaking complet
-							Level.Instance.RestartLevel ();
-						});
+				else if (s.Equals ("Obstacle"))
+				{
+					EatObstacle(other);
 				}
 			}
 		}
 
+		private void EatObstacle(Collider other)
+		{
+			Game.isGameover = true;
+			Destroy (other.gameObject);
+			CameraShake();
+		}
+
+		private void EatPointObject(Collider other)
+		{
+			LevelManager.Instance.objectsInScene--;
+			UIManager.Instance.inGameUI.UpdateLevelProgress();
+			Magnet.Instance.RemoveFromMagnetField (other.attachedRigidbody);
+			Destroy (other.gameObject);
+
+			if (LevelManager.Instance.objectsInScene == 0) {
+				UIManager.Instance.inGameUI.ShowLevelCompletedUI();
+				LevelManager.Instance.PlayWinFx();
+				Invoke (nameof(NextLevel), 2f);
+			}
+		}
+
+		private void CameraShake()
+		{
+			Camera.main.transform
+				.DOShakePosition (1f, .2f, 20, 90f)
+				.OnComplete (() => {
+					//restart level after shaking complet
+					LevelManager.Instance.RestartLevel ();
+				});
+		}
 		void NextLevel ()
 		{
-			Level.Instance.LoadNextLevel ();
+			LevelManager.Instance.LoadNextLevel ();
 		}
-		
 	}
 }
