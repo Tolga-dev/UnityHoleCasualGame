@@ -1,9 +1,7 @@
 using System;
 using System.Collections;
 using Brige_Race_Quiz.Scripts.So;
-using Controllers;
 using Core;
-using Managers;
 using So;
 using UnityEngine;
 

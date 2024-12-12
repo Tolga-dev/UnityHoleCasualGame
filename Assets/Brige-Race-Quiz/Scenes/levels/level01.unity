@@ -3971,7 +3971,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bd4eaff1e41b384fad789d10cbaa743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputCloser: {fileID: 0}
   timer1: {fileID: 839080492}
   holeMovement: {fileID: 1160680073}
   fxManager: {fileID: 1204949899}
@@ -4190,6 +4189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8541809fc8f1bc947969ab3549a82332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  holeMovement: {fileID: 1160680073}
 --- !u!1 &1725262328
 GameObject:
   m_ObjectHideFlags: 0

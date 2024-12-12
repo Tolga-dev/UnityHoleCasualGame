@@ -9,7 +9,7 @@ namespace Brige_Race_Quiz.Scripts.Player
 	{
 		public InputController inputController;
 		public FxManager fxManager;
-
+		
 		[Space]
 		[Header ("Hole mesh")]
 		[SerializeField] private MeshFilter meshFilter;
@@ -36,9 +36,10 @@ namespace Brige_Race_Quiz.Scripts.Player
 		
 		private int _holeVerticesCount;
 		private Vector3 _touch, _targetPos;
-
+		private float _originalRadius;
 		void Start ()
 		{
+			_originalRadius = radius;
 			_mesh = meshFilter.mesh;
 			_initialPoint = transform.localPosition;
 			
@@ -125,6 +126,13 @@ namespace Brige_Race_Quiz.Scripts.Player
 
 		public void ResetPlayer()
 		{
+			radius = _originalRadius;
+
+			_holeVertices.Clear();
+			_offsets.Clear();
+			
+			FindHoleVertices();
+			
 			transform.localPosition = _initialPoint;
 			UpdateHoleVerticesPosition ();
 		}

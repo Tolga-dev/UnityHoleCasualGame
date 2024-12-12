@@ -1,4 +1,5 @@
 ﻿using Brige_Race_Quiz.Scripts.Managers;
+using Brige_Race_Quiz.Scripts.Player;
 using DG.Tweening;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ namespace Brige_Race_Quiz.Scripts
 	//Object or Obstacle is at the bottom of the Hole
 	public class UndergroundCollision : MonoBehaviour
 	{
+		public HoleMovement holeMovement;
 		void OnTriggerEnter (Collider other)
 		{
 			if (!Game.isGameover) {
@@ -35,6 +37,7 @@ namespace Brige_Race_Quiz.Scripts
 			LevelManager.Instance.objectsInScene--;
 			UIManager.Instance.inGameUI.UpdateLevelProgress();
 			Magnet.Instance.RemoveFromMagnetField (other.attachedRigidbody);
+			
 			Destroy (other.gameObject);
 
 			if (LevelManager.Instance.objectsInScene == 0) {
