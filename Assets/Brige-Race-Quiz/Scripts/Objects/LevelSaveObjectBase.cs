@@ -2,8 +2,11 @@ using UnityEngine;
 
 public enum ObjectType
 {
-    PointObject,
-    ObjectObject
+    SquarePointObject,
+    CirclePointObject,
+    
+    SquareObstacleType,
+    CircleObstacleType
 }
 namespace Brige_Race_Quiz.Scripts.Objects
 {

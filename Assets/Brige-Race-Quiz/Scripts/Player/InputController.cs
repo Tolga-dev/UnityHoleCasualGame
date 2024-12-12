@@ -31,7 +31,7 @@ namespace Brige_Race_Quiz.Scripts.Player
             get
             {
                 getInputVector.x = GetAxis ("Mouse X");
-                getInputVector.y = GetAxis ("Mouse Y");
+                getInputVector.z = GetAxis ("Mouse Y");
                 return getInputVector;
             }
         }

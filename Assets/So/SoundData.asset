@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec47ba4e9006454a98378e0d275650af, type: 3}
   m_Name: SoundData
   m_EditorClassIdentifier: 
+  timeClip: {fileID: 8300000, guid: 36c5ca639bd04f4397bf0f6b38a4661e, type: 3}

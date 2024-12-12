@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
+using Brige_Race_Quiz.OutPacks.Timers.Scripts.Timers;
 using Brige_Race_Quiz.Scripts.Managers;
+using Brige_Race_Quiz.Scripts.Objects;
+using Brige_Race_Quiz.Scripts.Player;
 using Brige_Race_Quiz.Scripts.So;
 using Core;
 using UnityEngine;
@@ -10,9 +13,11 @@ namespace Brige_Race_Quiz.Scripts
 {
 	public class LevelManager : Singleton<LevelManager>
 	{
+		[SerializeField] Timer timer1;
+		public HoleMovement holeMovement;
 		public FxManager fxManager;
 		public GameSo gameSo;
-		
+		public Button gameSceneSaver;
 		[Space]
 		[HideInInspector] public int objectsInScene;
 		[HideInInspector] public int totalObjects;
@@ -48,10 +53,11 @@ namespace Brige_Race_Quiz.Scripts
 		[SerializeField] Color fadeColor;
 
 		public List<GameObject> createdPrefabs = new List<GameObject>();
+
 		void Start ()
 		{
-			GenerateCurrentLevel();
-			UpdateLevelColors ();
+			gameSceneSaver.onClick.AddListener(SaveGameSceneByUsingButton);
+			RestartLevel();
 		}
 
 		// new world generation
@@ -60,19 +66,22 @@ namespace Brige_Race_Quiz.Scripts
 			DestroyCreatedObjects();
 			
 			var currentLevel = gameSo.GetCurrentLevel();
-			var prefabs = currentLevel.objectPrefabs;
-			var transforms = currentLevel.objectTransforms;
-			var amount = prefabs.Count;
+			var objectInGames = currentLevel.objectsInGame;
+			var amount = objectInGames.Count;
+			var createdAmountOfPointObject = 0;
 			
 			for (int i = 0; i < amount; i++)
 			{
-				var createdPrefab = Instantiate(prefabs[i].prefab, transforms[i], Quaternion.identity,objectsParent);
-				createdPrefab.transform.parent = objectsParent;
+				var objectInGame = objectInGames[i];
+				var createdPrefab = Instantiate(objectInGame.objectPrefab.prefab, objectInGame.objectTransform, Quaternion.identity,objectsParent);
+				createdPrefab.transform.localScale = objectInGame.objectScale;
 				createdPrefabs.Add(createdPrefab);
+				if (IsItPoint(objectInGame.objectPrefab.objectType))
+					createdAmountOfPointObject++;
 			}
-			totalObjects = objectsInScene = amount;
+			
+			totalObjects = objectsInScene = createdAmountOfPointObject;
 		}
-
 		// destroy world
 		private void DestroyCreatedObjects()
 		{
@@ -92,10 +101,20 @@ namespace Brige_Race_Quiz.Scripts
 		public void RestartLevel()
 		{
 			GenerateCurrentLevel();
+			holeMovement.ResetPlayer();
 			UIManager.Instance.inGameUI.ResetGame();
 			Magnet.Instance.RestartMagnet();
 			Game.StartGame();
+			RestartTime();
 		}
+
+		private void RestartTime()
+		{
+			timer1.SetDuration(gameSo.GetCurrentLevel().timeAmount)
+				.OnEnd(RestartLevel)
+				.Begin();
+		}
+
 		public void PlayWinFx ()
 		{
 			fxManager.CreateEffects("", transform);
@@ -116,9 +135,36 @@ namespace Brige_Race_Quiz.Scripts
 			bgFadeSprite.color = fadeColor;
 		}
 
+		public void SaveGameSceneByUsingButton()
+		{
+			var objectsInGame = new List<ObjectInGame>();
+			
+			for (int i = 0; i < objectsParent.childCount; i++)
+			{
+				var currentChild = objectsParent.GetChild(i).gameObject;
+				var levelSaveObjectBase = currentChild.GetComponent<LevelSaveObjectBase>();
+				var currentPrefab = gameSo.GetCurrentPrefabFromType(levelSaveObjectBase.objectType);
+				
+				objectsInGame.Add(
+					new ObjectInGame() 
+						{ objectTransform = currentChild.transform.position, objectScale = currentChild.transform.localScale, 
+							
+							objectPrefab = new ObjectPrefab()
+								{prefab = currentPrefab,objectType = levelSaveObjectBase.objectType}
+						});
+			}
+			
+			var objectInGame = gameSo.GetCurrentLevel().objectsInGame;
+			objectInGame.Clear();
+			objectInGame.AddRange(objectsInGame);
+		}
+
 		void OnValidate()
 		{
 			UpdateLevelColors ();
 		}
+		
+		private bool IsItPoint(ObjectType objectPrefabObjectType) => 
+			objectPrefabObjectType is ObjectType.SquarePointObject or ObjectType.CirclePointObject;
 	}
 }

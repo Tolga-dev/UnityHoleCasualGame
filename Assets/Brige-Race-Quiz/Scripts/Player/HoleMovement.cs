@@ -30,7 +30,7 @@ namespace Brige_Race_Quiz.Scripts.Player
 
 		// private values
 		private Mesh _mesh;
-		
+		private Vector3 _initialPoint;
 		private readonly List<int> _holeVertices = new List<int> ();
 		private readonly List<Vector3> _offsets = new List<Vector3> ();
 		
@@ -39,12 +39,12 @@ namespace Brige_Race_Quiz.Scripts.Player
 
 		void Start ()
 		{
-			Game.StartGame();
+			_mesh = meshFilter.mesh;
+			_initialPoint = transform.localPosition;
 			
 			RotateCircleAnim();
 			FindHoleVertices();
 
-			_mesh = meshFilter.mesh;
 		}
 
 		void Update ()
@@ -122,6 +122,11 @@ namespace Brige_Race_Quiz.Scripts.Player
 			_holeVerticesCount = _holeVertices.Count;
 		}
 
+		public void ResetPlayer()
+		{
+			transform.localPosition = _initialPoint;
+			UpdateHoleVerticesPosition ();
+		}
 
 		//Visualize Hole vertices Radius in the Scene view
 		void OnDrawGizmos ()

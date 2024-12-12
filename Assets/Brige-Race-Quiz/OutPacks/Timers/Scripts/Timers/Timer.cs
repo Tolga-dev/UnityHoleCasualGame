@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using So;
 using UnityEngine;
@@ -28,7 +29,9 @@ namespace Brige_Race_Quiz.OutPacks.Timers.Scripts.Timers
         private UnityAction _onTimerEndAction;
         private UnityAction<bool> _onTimerPauseAction;
         
-        private void ResetTimer()
+        
+        private CancellationTokenSource _cancellationTokenSource;
+        public void ResetTimer()
         {
             uiText.text = "00:00";
             uiFillImage.fillAmount = 0f;
@@ -68,15 +71,24 @@ namespace Brige_Race_Quiz.OutPacks.Timers.Scripts.Timers
 
         public void Begin()
         {
+            StopTimer();
             _onTimerBeginAction?.Invoke();
-            StopAllCoroutines();
             _ = UpdateTimerAsync();
         }
 
         private async Task UpdateTimerAsync()
         {
+            _cancellationTokenSource = new CancellationTokenSource();
+            CancellationToken token = _cancellationTokenSource.Token;
+
             while (_remainingDuration > 0)
             {
+                if (token.IsCancellationRequested)
+                {
+                    Debug.Log("Timer canceled.");
+                    break;
+                }
+
                 if (!IsPaused)
                 {
                     _onTimerChangeAction?.Invoke(_remainingDuration);
@@ -84,7 +96,16 @@ namespace Brige_Race_Quiz.OutPacks.Timers.Scripts.Timers
                     _remainingDuration--;
                     audioSource?.PlayOneShot(soundData.timeClip);
                 }
-                await Task.Delay(1000); // Normal 1 second delay for the first third
+
+                try
+                {
+                    await Task.Delay(1000, token); // Use the cancellation token here
+                }
+                catch (TaskCanceledException)
+                {
+                    Debug.Log("Task delay canceled.");
+                    break;
+                }
             }
             End();
         }
@@ -97,14 +118,19 @@ namespace Brige_Race_Quiz.OutPacks.Timers.Scripts.Timers
 
         public void End()
         {
-            _onTimerEndAction?.Invoke();
             audioSource?.Stop();
-            ResetTimer();
+            if(_remainingDuration <= 0)
+                _onTimerEndAction?.Invoke();
         }
-
-        private void OnDestroy()
+        
+        public void StopTimer()
         {
-            StopAllCoroutines();
+            if (_cancellationTokenSource != null)
+            {
+                _cancellationTokenSource.Cancel();
+                _cancellationTokenSource.Dispose();
+                _cancellationTokenSource = null;
+            }
         }
     }
 }

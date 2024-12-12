@@ -6,20 +6,11 @@ namespace Core
     {
         private static T _instance;
         private static object _lock = new object();
-        private static bool _applicationIsQuitting = false;
  
         public static T Instance
         {
             get
             {
-                if (_applicationIsQuitting)
-                {
-                    Debugger.LogWarning("[Singleton] Instance '" + typeof(T) +
-                                     "' already destroyed on application quit." +
-                                     " Won't create again - returning null.");
-                    return null;
-                }
-
                 lock (_lock)
                 {
                     if (_instance == null)
@@ -56,16 +47,9 @@ namespace Core
         }
         public void Awake()
         {
-            _applicationIsQuitting = false;
-
             if (_instance == null)
                 _instance = Instance;
 
-        }
-
-        public void OnDestroy()
-        {
-            _applicationIsQuitting = true;
         }
     }
 }

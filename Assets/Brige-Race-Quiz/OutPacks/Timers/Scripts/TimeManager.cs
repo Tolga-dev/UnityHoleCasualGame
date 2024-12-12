@@ -9,8 +9,7 @@ namespace Brige_Race_Quiz.OutPacks.Timers.Scripts
       [SerializeField] Timer timer2 ;
       [SerializeField] Timer timer3 ;
       [SerializeField] Timer timer4 ;
-
-
+      
       private void Start()
       {
          // Timer 1: 6 seconds duration

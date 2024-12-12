@@ -12,6 +12,168 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ed6f50c8e694b45a2324b4e880b09dd, type: 3}
   m_Name: GameSo
   m_EditorClassIdentifier: 
-  levels: []
+  levels:
+  - objectsInGame:
+    - objectPrefab:
+        prefab: {fileID: 1244132921396542, guid: 8ea76ea8cd502a2409f6eb58b95955e8, type: 3}
+        objectType: 0
+      objectTransform: {x: 0, y: 0.4, z: 0.56}
+      objectScale: {x: 0.18062079, y: 0.18062072, z: 0.1806208}
+    - objectPrefab:
+        prefab: {fileID: 1244132921396542, guid: 8ea76ea8cd502a2409f6eb58b95955e8, type: 3}
+        objectType: 0
+      objectTransform: {x: 0, y: 0.4, z: 0.853}
+      objectScale: {x: 0.18062, y: 0.18062, z: 0.18062}
+    - objectPrefab:
+        prefab: {fileID: 1244132921396542, guid: 8ea76ea8cd502a2409f6eb58b95955e8, type: 3}
+        objectType: 0
+      objectTransform: {x: 0, y: 0.4, z: 1.129}
+      objectScale: {x: 0.18062, y: 0.18062, z: 0.18062}
+    - objectPrefab:
+        prefab: {fileID: 1244132921396542, guid: 8ea76ea8cd502a2409f6eb58b95955e8, type: 3}
+        objectType: 0
+      objectTransform: {x: 0, y: 0.4, z: -0.6070001}
+      objectScale: {x: 0.18062, y: 0.18062, z: 0.18062}
+    - objectPrefab:
+        prefab: {fileID: 1244132921396542, guid: 8ea76ea8cd502a2409f6eb58b95955e8, type: 3}
+        objectType: 0
+      objectTransform: {x: 0, y: 0.4, z: -0.8830001}
+      objectScale: {x: 0.18062, y: 0.18062, z: 0.18062}
+    - objectPrefab:
+        prefab: {fileID: 1244132921396542, guid: 8ea76ea8cd502a2409f6eb58b95955e8, type: 3}
+        objectType: 0
+      objectTransform: {x: 0, y: 0.4, z: -1.176}
+      objectScale: {x: 0.18062, y: 0.18062, z: 0.18062}
+    - objectPrefab:
+        prefab: {fileID: 1244132921396542, guid: 8ea76ea8cd502a2409f6eb58b95955e8, type: 3}
+        objectType: 0
+      objectTransform: {x: 0.69, y: 0.4, z: -0.3829999}
+      objectScale: {x: 0.18062, y: 0.18062, z: 0.18062}
+    - objectPrefab:
+        prefab: {fileID: 1244132921396542, guid: 8ea76ea8cd502a2409f6eb58b95955e8, type: 3}
+        objectType: 0
+      objectTransform: {x: 0.69, y: 0.4, z: -0.09}
+      objectScale: {x: 0.18062, y: 0.18062, z: 0.18062}
+    - objectPrefab:
+        prefab: {fileID: 1244132921396542, guid: 8ea76ea8cd502a2409f6eb58b95955e8, type: 3}
+        objectType: 0
+      objectTransform: {x: 0.69, y: 0.4, z: 0.18599999}
+      objectScale: {x: 0.18062, y: 0.18062, z: 0.18062}
+    - objectPrefab:
+        prefab: {fileID: 1244132921396542, guid: 8ea76ea8cd502a2409f6eb58b95955e8, type: 3}
+        objectType: 0
+      objectTransform: {x: -0.73499995, y: 0.4, z: 0.186}
+      objectScale: {x: 0.18062, y: 0.18062, z: 0.18062}
+    - objectPrefab:
+        prefab: {fileID: 1244132921396542, guid: 8ea76ea8cd502a2409f6eb58b95955e8, type: 3}
+        objectType: 0
+      objectTransform: {x: -0.735, y: 0.4, z: -0.09}
+      objectScale: {x: 0.18062, y: 0.18062, z: 0.18062}
+    - objectPrefab:
+        prefab: {fileID: 1244132921396542, guid: 8ea76ea8cd502a2409f6eb58b95955e8, type: 3}
+        objectType: 0
+      objectTransform: {x: -0.73499995, y: 0.4, z: -0.3829999}
+      objectScale: {x: 0.18062, y: 0.18062, z: 0.18062}
+    - objectPrefab:
+        prefab: {fileID: 1244132921396542, guid: 8ea76ea8cd502a2409f6eb58b95955e8, type: 3}
+        objectType: 0
+      objectTransform: {x: -0.2919142, y: 0.39999998, z: 2.2362986}
+      objectScale: {x: 0.18062, y: 0.18062, z: 0.18062}
+    - objectPrefab:
+        prefab: {fileID: 1244132921396542, guid: 8ea76ea8cd502a2409f6eb58b95955e8, type: 3}
+        objectType: 0
+      objectTransform: {x: 0.0010847151, y: 0.39999998, z: 2.2370605}
+      objectScale: {x: 0.18062, y: 0.18062, z: 0.18062}
+    - objectPrefab:
+        prefab: {fileID: 1244132921396542, guid: 8ea76ea8cd502a2409f6eb58b95955e8, type: 3}
+        objectType: 0
+      objectTransform: {x: 0.27708387, y: 0.39999998, z: 2.2377787}
+      objectScale: {x: 0.18062, y: 0.18062, z: 0.18062}
+    - objectPrefab:
+        prefab: {fileID: 1244132921396542, guid: 8ea76ea8cd502a2409f6eb58b95955e8, type: 3}
+        objectType: 0
+      objectTransform: {x: 0.28079247, y: 0.4, z: 0.8127843}
+      objectScale: {x: 0.18062, y: 0.18062, z: 0.18062}
+    - objectPrefab:
+        prefab: {fileID: 1244132921396542, guid: 8ea76ea8cd502a2409f6eb58b95955e8, type: 3}
+        objectType: 0
+      objectTransform: {x: -0.28820568, y: 0.40000004, z: 0.81130326}
+      objectScale: {x: 0.18062, y: 0.18062, z: 0.18062}
+    - objectPrefab:
+        prefab: {fileID: 1244132921396542, guid: 8ea76ea8cd502a2409f6eb58b95955e8, type: 3}
+        objectType: 0
+      objectTransform: {x: -1.0829988, y: 0.4, z: 1.4992373}
+      objectScale: {x: 0.18062, y: 0.18062, z: 0.18062}
+    - objectPrefab:
+        prefab: {fileID: 1244132921396542, guid: 8ea76ea8cd502a2409f6eb58b95955e8, type: 3}
+        objectType: 0
+      objectTransform: {x: -0.79, y: 0.4, z: 1.5}
+      objectScale: {x: 0.18062, y: 0.18062, z: 0.18062}
+    - objectPrefab:
+        prefab: {fileID: 1244132921396542, guid: 8ea76ea8cd502a2409f6eb58b95955e8, type: 3}
+        objectType: 0
+      objectTransform: {x: -0.51400083, y: 0.40000007, z: 1.5007179}
+      objectScale: {x: 0.18062, y: 0.18062, z: 0.18062}
+    - objectPrefab:
+        prefab: {fileID: 1244132921396542, guid: 8ea76ea8cd502a2409f6eb58b95955e8, type: 3}
+        objectType: 0
+      objectTransform: {x: 1.2219934, y: 0.39999998, z: 1.5052354}
+      objectScale: {x: 0.18062, y: 0.18062, z: 0.18062}
+    - objectPrefab:
+        prefab: {fileID: 1244132921396542, guid: 8ea76ea8cd502a2409f6eb58b95955e8, type: 3}
+        objectType: 0
+      objectTransform: {x: 0.9459942, y: 0.4, z: 1.5045172}
+      objectScale: {x: 0.18062, y: 0.18062, z: 0.18062}
+    - objectPrefab:
+        prefab: {fileID: 1244132921396542, guid: 8ea76ea8cd502a2409f6eb58b95955e8, type: 3}
+        objectType: 0
+      objectTransform: {x: 0.65299517, y: 0.39999995, z: 1.5037547}
+      objectScale: {x: 0.18062, y: 0.18062, z: 0.18062}
+    - objectPrefab:
+        prefab: {fileID: 1514670397841378, guid: f0fc3226c3bb23c42a6c2c7c56f01ad8, type: 3}
+        objectType: 2
+      objectTransform: {x: 0, y: 0.4, z: -0.09}
+      objectScale: {x: 0.3185587, y: 0.3185587, z: 0.31855884}
+    - objectPrefab:
+        prefab: {fileID: 1514670397841378, guid: f0fc3226c3bb23c42a6c2c7c56f01ad8, type: 3}
+        objectType: 2
+      objectTransform: {x: 1.348, y: 0.4, z: -0.695}
+      objectScale: {x: 0.19012047, y: 0.1901204, z: 0.1901204}
+    - objectPrefab:
+        prefab: {fileID: 1514670397841378, guid: f0fc3226c3bb23c42a6c2c7c56f01ad8, type: 3}
+        objectType: 2
+      objectTransform: {x: 0.6950001, y: 0.4, z: -0.695}
+      objectScale: {x: 0.19012047, y: 0.1901204, z: 0.1901204}
+    - objectPrefab:
+        prefab: {fileID: 1514670397841378, guid: f0fc3226c3bb23c42a6c2c7c56f01ad8, type: 3}
+        objectType: 2
+      objectTransform: {x: -1.383, y: 0.4, z: -0.695}
+      objectScale: {x: 0.19012, y: 0.19012, z: 0.19012}
+    - objectPrefab:
+        prefab: {fileID: 1514670397841378, guid: f0fc3226c3bb23c42a6c2c7c56f01ad8, type: 3}
+        objectType: 2
+      objectTransform: {x: -0.73, y: 0.4, z: -0.695}
+      objectScale: {x: 0.19012, y: 0.19012, z: 0.19012}
+    - objectPrefab:
+        prefab: {fileID: 1514670397841378, guid: f0fc3226c3bb23c42a6c2c7c56f01ad8, type: 3}
+        objectType: 2
+      objectTransform: {x: 0, y: 0.4, z: 1.556}
+      objectScale: {x: 0.31856, y: 0.31856, z: 0.31856}
+    - objectPrefab:
+        prefab: {fileID: 1514670397841378, guid: f0fc3226c3bb23c42a6c2c7c56f01ad8, type: 3}
+        objectType: 2
+      objectTransform: {x: 0.722, y: 0.4, z: 0.896}
+      objectScale: {x: 0.31856, y: 0.31856, z: 0.31856}
+    - objectPrefab:
+        prefab: {fileID: 1514670397841378, guid: f0fc3226c3bb23c42a6c2c7c56f01ad8, type: 3}
+        objectType: 2
+      objectTransform: {x: -0.722, y: 0.4, z: 0.887}
+      objectScale: {x: 0.31856, y: 0.31856, z: 0.31856}
+    timeAmount: 2
+  objectPrefabs:
+  - prefab: {fileID: 1244132921396542, guid: 8ea76ea8cd502a2409f6eb58b95955e8, type: 3}
+    objectType: 0
+  - prefab: {fileID: 1514670397841378, guid: f0fc3226c3bb23c42a6c2c7c56f01ad8, type: 3}
+    objectType: 2
   currentLevel: 0
   gameEffectSound: 0

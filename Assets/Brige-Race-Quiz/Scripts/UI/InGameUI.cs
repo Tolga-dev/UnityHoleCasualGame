@@ -31,8 +31,6 @@ namespace Brige_Race_Quiz.Scripts.UI
 
             _saveManager = SaveManager.Instance;
             _soundManager = SoundManager.Instance;
-
-            ResetGame();
         }
         
         // update level

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Brige_Race_Quiz.Scripts.So
 {
@@ -30,13 +31,31 @@ namespace Brige_Race_Quiz.Scripts.So
         {
             return null;
         }
+
+        public GameObject GetCurrentPrefabFromType(ObjectType objectType)
+        {
+            foreach (var objectPrefab in objectPrefabs)
+            {
+                if (objectPrefab.objectType == objectType)
+                    return objectPrefab.prefab;
+            }
+            return null;
+        }
     }
     
     [Serializable]
     public class Level
     {
-        public List<ObjectPrefab> objectPrefabs = new List<ObjectPrefab>();
-        public List<Vector3> objectTransforms = new List<Vector3>();
+        public List<ObjectInGame> objectsInGame = new List<ObjectInGame>();
+        public int timeAmount;
+    }
+
+    [Serializable]
+    public class ObjectInGame
+    {
+        public ObjectPrefab objectPrefab;
+        public Vector3 objectTransform;
+        public Vector3 objectScale;
     }
 
     [Serializable]

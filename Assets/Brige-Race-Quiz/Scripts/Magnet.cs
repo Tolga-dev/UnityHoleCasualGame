@@ -15,7 +15,6 @@ namespace Brige_Race_Quiz.Scripts
 		private void Start ()
 		{
 			_magnet = transform;
-			RestartMagnet();
 		}
 
 		public void RestartMagnet()
