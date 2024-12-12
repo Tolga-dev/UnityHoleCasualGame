@@ -23,11 +23,13 @@ namespace Brige_Race_Quiz.Scripts.UI
         [SerializeField] Image fadePanel;
 
         private SaveManager _saveManager;
+        private SoundManager _soundManager;
         public override void Starter(UIManager uiManager)
         {
             base.Starter(uiManager);
 
             _saveManager = SaveManager.Instance;
+            _soundManager = SoundManager.Instance;
 
             ResetGame();
         }
@@ -37,14 +39,16 @@ namespace Brige_Race_Quiz.Scripts.UI
         {
             var val = 1f - ((float)Level.Instance.objectsInScene / Level.Instance.totalObjects);
             progressFillImage.DOFillAmount (val, .4f);
+            Debug.Log("PlayPointSound");
         }
         
         // reset game
         public void ResetGame()
         {
-            FadeAtStart();
             progressFillImage.fillAmount = 0f;
+            FadeAtStart();
             SetLevelProgressText ();
+            Debug.Log("PlayResetGameSound");
         }
 
         // set levels

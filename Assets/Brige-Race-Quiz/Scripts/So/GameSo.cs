@@ -6,5 +6,13 @@ namespace Brige_Race_Quiz.Scripts.So
     public class GameSo : ScriptableObject
     {
         public int currentLevel;
+        
+        
+        // sounds
+        public bool gameEffectSound;
+        public AudioClip GetSound(string newClipName)
+        {
+            return null;
+        }
     }
 }
