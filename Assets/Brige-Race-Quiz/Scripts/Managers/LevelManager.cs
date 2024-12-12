@@ -5,6 +5,7 @@ using Brige_Race_Quiz.Scripts.Objects;
 using Brige_Race_Quiz.Scripts.Player;
 using Brige_Race_Quiz.Scripts.So;
 using Core;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;

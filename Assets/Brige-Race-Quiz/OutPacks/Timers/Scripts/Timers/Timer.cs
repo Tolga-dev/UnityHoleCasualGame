@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Brige_Race_Quiz.Scripts;
+using DG.Tweening;
 using So;
 using UnityEngine;
 using UnityEngine.Events;
@@ -10,6 +12,11 @@ namespace Brige_Race_Quiz.OutPacks.Timers.Scripts.Timers
 {
     public class Timer : MonoBehaviour
     {
+        public float shakeDuration = 0.5f;
+        public float shakeStrength = 20f;
+        public int vibrato = 10;
+        public float sizeMultiplier = 2f; // Scale multiplier for doubling the size
+
         public SoundData soundData;
         
         [Header("Timer UI references:")]
@@ -119,8 +126,36 @@ namespace Brige_Race_Quiz.OutPacks.Timers.Scripts.Timers
         public void End()
         {
             audioSource?.Stop();
-            if(_remainingDuration <= 0)
-                _onTimerEndAction?.Invoke();
+            // Move to the middle of the screen
+            var screenCenter = new Vector3(Screen.width / 2f, Screen.height / 2f, 0f);
+            var originalPos = transform.position;
+            var originalScale = transform.localScale;
+
+            if (_remainingDuration > 0)
+                return;
+            
+            Game.StopGame();
+            transform.DOMove(screenCenter, 0.5f) // Move to the middle of the screen
+                .OnComplete(() =>
+                {
+                    transform.DOScale(originalScale * sizeMultiplier, 0.3f) // Double the size
+                        .OnComplete(() =>
+                        {
+                            transform.DOShakePosition(shakeDuration, shakeStrength, vibrato) // Shake the position
+                                .OnComplete(() =>
+                                {
+                                    // Return to the original position and scale
+                                    transform.DOMove(originalPos, 0.5f);
+                                    transform.DOScale(originalScale, 0.3f).OnComplete(() =>
+                                    {
+                                        if (_remainingDuration <= 0)
+                                        {
+                                            _onTimerEndAction?.Invoke(); // Call the timer end action
+                                        }
+                                    });
+                                });
+                        });
+                });
         }
         
         public void StopTimer()

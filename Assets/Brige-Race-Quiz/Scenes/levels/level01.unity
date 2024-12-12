@@ -443,6 +443,10 @@ PrefabInstance:
       value: 0.8490566
       objectReference: {fileID: 0}
     - target: {fileID: 114735647941030932, guid: 1ffcdfad0adb128498aaed7db0defcc2, type: 3}
+      propertyPath: vibrato
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114735647941030932, guid: 1ffcdfad0adb128498aaed7db0defcc2, type: 3}
       propertyPath: soundData
       value: 
       objectReference: {fileID: 11400000, guid: 08457963ca9139d0a9b5a4be1a29bbed, type: 2}
@@ -450,6 +454,14 @@ PrefabInstance:
       propertyPath: audioSource
       value: 
       objectReference: {fileID: 839080495}
+    - target: {fileID: 114735647941030932, guid: 1ffcdfad0adb128498aaed7db0defcc2, type: 3}
+      propertyPath: shakeDuration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114735647941030932, guid: 1ffcdfad0adb128498aaed7db0defcc2, type: 3}
+      propertyPath: shakeStrength
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 114737114999432812, guid: 1ffcdfad0adb128498aaed7db0defcc2, type: 3}
       propertyPath: m_Color.b
       value: 0.3726415
@@ -3959,6 +3971,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bd4eaff1e41b384fad789d10cbaa743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputCloser: {fileID: 0}
   timer1: {fileID: 839080492}
   holeMovement: {fileID: 1160680073}
   fxManager: {fileID: 1204949899}

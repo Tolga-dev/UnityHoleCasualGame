@@ -1,18 +1,17 @@
 * Level generator by button, save it and use it -ok
 * Finish General Game -ok
-* Timer
-* Voice effects
-* Particle effects
-* Fake records 
-* UI Effects, Animations, 3 sn saycak oyle yeni seviye
-* UI Controls 
-* Bigger holes, can be eaten or be eaten 
+* Timer -ok
 * Getting big after eating
-* Some places that can go in 
+* Some places that cant go in 
+* in some levels, objects and can eatable will be changed with timer
 * In Some levels - Islands will be connected each other and timer will be there
   * Some special boxes - give additional points - it helps to open next island - u cant go there directly  
-* Island generator by button, save it use it 
+  * Bigger holes, can be eaten or be eaten 
 * 50 level enough
-* in some levels, objects and can eatable will be changed with timer
+* Island generator by button, save it use it 
 
+* Voice effects 
+* Particle effects
+* UI Effects, Animations, 3 sn saycak oyle yeni seviye
+* UI Controls 
 

@@ -10,5 +10,10 @@
 			isMoving = false;
 			isGameover = false;
 		}
+		public static void StopGame()
+		{
+			isMoving = false;
+			isGameover = true;
+		}
 	}
 }

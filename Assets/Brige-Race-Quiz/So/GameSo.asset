@@ -169,7 +169,7 @@ MonoBehaviour:
         objectType: 2
       objectTransform: {x: -0.722, y: 0.4, z: 0.887}
       objectScale: {x: 0.31856, y: 0.31856, z: 0.31856}
-    timeAmount: 2
+    timeAmount: 5
   objectPrefabs:
   - prefab: {fileID: 1244132921396542, guid: 8ea76ea8cd502a2409f6eb58b95955e8, type: 3}
     objectType: 0

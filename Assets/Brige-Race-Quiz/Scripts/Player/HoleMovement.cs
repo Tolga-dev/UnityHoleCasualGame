@@ -49,12 +49,13 @@ namespace Brige_Race_Quiz.Scripts.Player
 
 		void Update ()
 		{
+			if (Game.isGameover) return;
 			inputController.Update();
-			
-			if (!Game.isGameover && Game.isMoving) {
-				MoveHole ();
-				UpdateHoleVerticesPosition ();
-			}
+
+			if (!Game.isMoving) return;
+				
+			MoveHole ();
+			UpdateHoleVerticesPosition ();
 		}
 
 		void MoveHole ()
