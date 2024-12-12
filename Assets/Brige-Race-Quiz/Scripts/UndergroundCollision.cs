@@ -1,55 +1,57 @@
-﻿using UnityEngine;
-using UnityEngine.SceneManagement;
-using DG.Tweening;
+﻿using DG.Tweening;
+using UnityEngine;
 
-public class UndergroundCollision : MonoBehaviour
+namespace Brige_Race_Quiz.Scripts
 {
-
-	void OnTriggerEnter (Collider other)
+	public class UndergroundCollision : MonoBehaviour
 	{
-		//Object or Obstacle is at the bottom of the Hole
 
-		if (!Game.isGameover) {
-			string tag = other.tag;
-			//------------------------ O B J E C T --------------------------
-			if (tag.Equals ("Object")) { 
-				Level.Instance.objectsInScene--;
-				UIManager.Instance.UpdateLevelProgress ();
+		void OnTriggerEnter (Collider other)
+		{
+			//Object or Obstacle is at the bottom of the Hole
 
-				//Make sure to remove this object from Magnetic field
-				Magnet.Instance.RemoveFromMagnetField (other.attachedRigidbody);
+			if (!Game.isGameover) {
+				string tag = other.tag;
+				//------------------------ O B J E C T --------------------------
+				if (tag.Equals ("Object")) { 
+					Level.Instance.objectsInScene--;
+					UIManager.Instance.UpdateLevelProgress ();
 
-				Destroy (other.gameObject);
+					//Make sure to remove this object from Magnetic field
+					Magnet.Instance.RemoveFromMagnetField (other.attachedRigidbody);
 
-				//check if win
-				if (Level.Instance.objectsInScene == 0) {
-					//no more objects to collect (WIN)
-					UIManager.Instance.ShowLevelCompletedUI ();
-					Level.Instance.PlayWinFx ();
+					Destroy (other.gameObject);
 
-					//Load Next level after 2 seconds
-					Invoke ("NextLevel", 2f);
+					//check if win
+					if (Level.Instance.objectsInScene == 0) {
+						//no more objects to collect (WIN)
+						UIManager.Instance.ShowLevelCompletedUI ();
+						Level.Instance.PlayWinFx ();
+
+						//Load Next level after 2 seconds
+						Invoke ("NextLevel", 2f);
+					}
+				}
+				//---------------------- O B S T A C L E -----------------------
+				if (tag.Equals ("Obstacle")) {
+					Game.isGameover = true;
+					Destroy (other.gameObject);
+
+					//Shake the camera for 1 second
+					Camera.main.transform
+						.DOShakePosition (1f, .2f, 20, 90f)
+						.OnComplete (() => {
+							//restart level after shaking complet
+							Level.Instance.RestartLevel ();
+						});
 				}
 			}
-			//---------------------- O B S T A C L E -----------------------
-			if (tag.Equals ("Obstacle")) {
-				Game.isGameover = true;
-				Destroy (other.gameObject);
-
-				//Shake the camera for 1 second
-				Camera.main.transform
-					.DOShakePosition (1f, .2f, 20, 90f)
-					.OnComplete (() => {
-					//restart level after shaking complet
-					Level.Instance.RestartLevel ();
-				});
-			}
 		}
-	}
 
-	void NextLevel ()
-	{
-		Level.Instance.LoadNextLevel ();
-	}
+		void NextLevel ()
+		{
+			Level.Instance.LoadNextLevel ();
+		}
 		
+	}
 }

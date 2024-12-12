@@ -1,71 +1,74 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
-[RequireComponent (typeof(SphereCollider))]
-public class Magnet : MonoBehaviour
+namespace Brige_Race_Quiz.Scripts
 {
-	#region Singleton class: Magnet
-
-	public static Magnet Instance;
-
-	void Awake ()
+	[RequireComponent (typeof(SphereCollider))]
+	public class Magnet : MonoBehaviour
 	{
-		if (Instance == null) {
-			Instance = this;
-		}
-	}
+		#region Singleton class: Magnet
 
-	#endregion
+		public static Magnet Instance;
 
-	[SerializeField] float magnetForce;
-
-
-	//to store objects inside magnetic field
-	List<Rigidbody> affectedRigidbodies = new List<Rigidbody> ();
-	Transform magnet;
-
-	void Start ()
-	{
-		magnet = transform;
-		affectedRigidbodies.Clear ();
-	}
-
-	void FixedUpdate ()
-	{
-		if (!Game.isGameover && Game.isMoving) {
-			foreach (Rigidbody rb in affectedRigidbodies) {
-				rb.AddForce ((magnet.position - rb.position) * magnetForce * Time.fixedDeltaTime);
+		void Awake ()
+		{
+			if (Instance == null) {
+				Instance = this;
 			}
 		}
-	}
 
-	//Object enters Magnetic field
-	void OnTriggerEnter (Collider other)
-	{
-		string tag = other.tag;
+		#endregion
 
-		if (!Game.isGameover && (tag.Equals ("Obstacle") || tag.Equals ("Object"))) {
-			AddToMagnetField (other.attachedRigidbody);
+		[SerializeField] float magnetForce;
+
+
+		//to store objects inside magnetic field
+		List<Rigidbody> affectedRigidbodies = new List<Rigidbody> ();
+		Transform magnet;
+
+		void Start ()
+		{
+			magnet = transform;
+			affectedRigidbodies.Clear ();
 		}
-	}
 
-	//Object exits Magnetic field
-	void OnTriggerExit (Collider other)
-	{
-		string tag = other.tag;
-
-		if (!Game.isGameover && (tag.Equals ("Obstacle") || tag.Equals ("Object"))) {
-			RemoveFromMagnetField (other.attachedRigidbody);
+		void FixedUpdate ()
+		{
+			if (!Game.isGameover && Game.isMoving) {
+				foreach (Rigidbody rb in affectedRigidbodies) {
+					rb.AddForce ((magnet.position - rb.position) * (magnetForce * Time.fixedDeltaTime));
+				}
+			}
 		}
-	}
 
-	public void AddToMagnetField (Rigidbody rb)
-	{
-		affectedRigidbodies.Add (rb);
-	}
+		//Object enters Magnetic field
+		void OnTriggerEnter (Collider other)
+		{
+			string tag = other.tag;
 
-	public void RemoveFromMagnetField (Rigidbody rb)
-	{
-		affectedRigidbodies.Remove (rb);
+			if (!Game.isGameover && (tag.Equals ("Obstacle") || tag.Equals ("Object"))) {
+				AddToMagnetField (other.attachedRigidbody);
+			}
+		}
+
+		//Object exits Magnetic field
+		void OnTriggerExit (Collider other)
+		{
+			string tag = other.tag;
+
+			if (!Game.isGameover && (tag.Equals ("Obstacle") || tag.Equals ("Object"))) {
+				RemoveFromMagnetField (other.attachedRigidbody);
+			}
+		}
+
+		public void AddToMagnetField (Rigidbody rb)
+		{
+			affectedRigidbodies.Add (rb);
+		}
+
+		public void RemoveFromMagnetField (Rigidbody rb)
+		{
+			affectedRigidbodies.Remove (rb);
+		}
 	}
 }

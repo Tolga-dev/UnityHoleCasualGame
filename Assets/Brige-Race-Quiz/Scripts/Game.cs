@@ -1,5 +1,8 @@
-﻿public class Game
+﻿namespace Brige_Race_Quiz.Scripts
 {
-	public static bool isGameover = false;
-	public static bool isMoving = false;
+	public abstract class Game
+	{
+		public static bool isGameover = false;
+		public static bool isMoving = false;
+	}
 }
